@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4th Semester SGPA Calculator</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#eef2f7;
+    padding:30px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+h1{
+    text-align:center;
+    color:#0d6efd;
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#0d6efd;
+    color:white;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+input{
+    width:65px;
+    padding:6px;
+    text-align:center;
+    font-size:15px;
+}
+
+.resultBox{
+    margin-top:25px;
+    background:#f8f9fa;
+    border-radius:10px;
+    padding:20px;
+}
+
+.resultBox h2{
+    color:#198754;
+    margin-bottom:10px;
+}
+
+.result{
+    font-size:20px;
+    margin:8px 0;
+}
+
+button{
+    margin-top:20px;
+    width:100%;
+    padding:12px;
+    background:#dc3545;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:17px;
+}
+
+button:hover{
+    background:#bb2d3b;
+}
+
+@media(max-width:900px){
+table{
+display:block;
+overflow-x:auto;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>GNDEC / IKGPTU 4th Semester SGPA Calculator</h1>
+
+<table>
+
+<tr>
+<th>Subject</th>
+<th>Credits</th>
+<th>Internal</th>
+<th>External</th>
+<th>Total</th>
+<th>Max</th>
+<th>%</th>
+<th>GP</th>
+<th>Credit Points</th>
+</tr>
+
+<tr>
+<td>DBMS</td>
+<td>4</td>
+<td><input id="i1" oninput="calc()"></td>
+<td><input id="e1" oninput="calc()"></td>
+<td id="t1">0</td>
+<td>150</td>
+<td id="p1">0%</td>
+<td id="g1">0</td>
+<td id="cp1">0</td>
+</tr>
+
+<tr>
+<td>Operating System</td>
+<td>4</td>
+<td><input id="i2" oninput="calc()"></td>
+<td><input id="e2" oninput="calc()"></td>
+<td id="t2">0</td>
+<td>150</td>
+<td id="p2">0%</td>
+<td id="g2">0</td>
+<td id="cp2">0</td>
+</tr>
+
+<tr>
+<td>Computer Networks</td>
+<td>5</td>
+<td><input id="i3" oninput="calc()"></td>
+<td><input id="e3" oninput="calc()"></td>
+<td id="t3">0</td>
+<td>150</td>
+<td id="p3">0%</td>
+<td id="g3">0</td>
+<td id="cp3">0</td>
+</tr>
+
+<tr>
+<td>Discrete Mathematics</td>
+<td>4</td>
+<td><input id="i4" oninput="calc()"></td>
+<td><input id="e4" oninput="calc()"></td>
+<td id="t4">0</td>
+<td>100</td>
+<td id="p4">0%</td>
+<td id="g4">0</td>
+<td id="cp4">0</td>
+</tr>
+
+<tr>
+<td>Artificial Intelligence</td>
+<td>4</td>
+<td><input id="i5" oninput="calc()"></td>
+<td><input id="e5" oninput="calc()"></td>
+<td id="t5">0</td>
+<td>150</td>
+<td id="p5">0%</td>
+<td id="g5">0</td>
+<td id="cp5">0</td>
+</tr>
+
+<tr>
+<td>Data Analytics Tools</td>
+<td>1</td>
+<td><input id="i6" oninput="calc()"></td>
+<td>-</td>
+<td id="t6">0</td>
+<td>50</td>
+<td id="p6">0%</td>
+<td id="g6">0</td>
+<td id="cp6">0</td>
+</tr>
+
+<tr>
+<td>Business Essentials</td>
+<td>2</td>
+<td><input id="i7" oninput="calc()"></td>
+<td><input id="e7" oninput="calc()"></td>
+<td id="t7">0</td>
+<td>100</td>
+<td id="p7">0%</td>
+<td id="g7">0</td>
+<td id="cp7">0</td>
+</tr>
+
+</table>
+
+<div class="resultBox">
+
+<h2>Result</h2>
+
+<div class="result">Total Credits : <b>24</b></div>
+
+<div class="result">
+Total Credit Points :
+<b id="tcp">0</b>
+</div>
+
+<div class="result">
+SGPA :
+<b id="sgpa">0.00</b>
+</div>
+
+</div>
+
+<button onclick="resetAll()">Reset</button>
+
+</div>
+
+<script>
+
+const credits=[4,4,5,4,4,1,2];
+const maxMarks=[150,150,150,100,150,50,100];
+
+function grade(p){
+
+if(p>=90) return 10;
+if(p>=80) return 9;
+if(p>=70) return 8;
+if(p>=60) return 7;
+if(p>=50) return 6;
+if(p>=45) return 5;
+if(p>=40) return 4;
+return 0;
+
+}
+
+function calc(){
+
+let totalCP=0;
+
+for(let x=1;x<=7;x++){
+
+let internal=parseFloat(document.getElementById("i"+x).value)||0;
+
+let external=0;
+
+if(x!=6)
+external=parseFloat(document.getElementById("e"+x).value)||0;
+
+let total=internal+external;
+
+let per=(total/maxMarks[x-1])*100;
+
+let gp=grade(per);
+
+let cp=gp*credits[x-1];
+
+document.getElementById("t"+x).innerHTML=total;
+
+document.getElementById("p"+x).innerHTML=per.toFixed(2)+"%";
+
+document.getElementById("g"+x).innerHTML=gp;
+
+document.getElementById("cp"+x).innerHTML=cp;
+
+totalCP+=cp;
+
+}
+
+document.getElementById("tcp").innerHTML=totalCP;
+
+document.getElementById("sgpa").innerHTML=(totalCP/24).toFixed(2);
+
+}
+
+function resetAll(){
+
+document.querySelectorAll("input").forEach(x=>x.value="");
+
+calc();
+
+}
+
+calc();
+
+</script>
+
+</body>
+</html>
