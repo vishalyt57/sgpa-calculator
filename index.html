@@ -200,14 +200,24 @@ overflow-x:auto;
 <td id="g7">0</td>
 <td id="cp7">0</td>
 </tr>
-
+<tr>
+<td>Mentoring & Professional Development</td>
+<td>1</td>
+<td><input id="i8" oninput="calc()"></td>
+<td>-</td>
+<td id="t8">0</td>
+<td>100</td>
+<td id="p8">0%</td>
+<td id="g8">0</td>
+<td id="cp8">0</td>
+</tr>
 </table>
 
 <div class="resultBox">
 
 <h2>Result</h2>
 
-<div class="result">Total Credits : <b>24</b></div>
+<div class="result">Total Credits : <b>25</b></div>
 
 <div class="result">
 Total Credit Points :
@@ -227,8 +237,8 @@ SGPA :
 
 <script>
 
-const credits=[4,4,5,4,4,1,2];
-const maxMarks=[150,150,150,100,150,50,100];
+const credits=[4,4,5,4,4,1,2,1];
+const maxMarks=[150,150,150,100,150,50,100,100];
 
 function grade(p){
 
@@ -247,13 +257,14 @@ function calc(){
 
 let totalCP=0;
 
-for(let x=1;x<=7;x++){
+for(let x=1;x<=8;x++){
 
 let internal=parseFloat(document.getElementById("i"+x).value)||0;
 
 let external=0;
 
-if(x!=6)
+if(x!=6 && x!=8)
+
 external=parseFloat(document.getElementById("e"+x).value)||0;
 
 let total=internal+external;
@@ -278,7 +289,7 @@ totalCP+=cp;
 
 document.getElementById("tcp").innerHTML=totalCP;
 
-document.getElementById("sgpa").innerHTML=(totalCP/24).toFixed(2);
+document.getElementById("sgpa").innerHTML=(totalCP/25).toFixed(2);
 
 }
 
